@@ -14,6 +14,7 @@ jobs:
           patH: test.txt
   
   downloadartifact:
+    needs: job
     runs-on: ubuntu-latest
     steps:
       - name: download artifart
