@@ -23,4 +23,4 @@ jobs:
           name: uploadtest
         
       - name: output text
-        uses: cat test.txt
+        run: cat test.txt
