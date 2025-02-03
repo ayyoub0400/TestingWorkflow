@@ -1,11 +1,11 @@
-name: myworkflow
+name: helloworkflow
 on: [push]
-jobs: 
+jobs:
   job:
     runs-on: ubuntu-latest
     steps:
-      - name: checkoutcode
+      - name: checkout
         uses: actions/checkout@v4
-        
+      
       - name: helloworld
-        run: cat hello.txt  
+        run: cat hello.txt
