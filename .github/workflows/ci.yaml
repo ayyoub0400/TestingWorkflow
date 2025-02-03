@@ -4,5 +4,7 @@ jobs:
   job:
     runs-on: ubuntu-latest
     steps:
+      - name: checkoutcode
+        uses: actions/checkout@v4
       - name: helloworld
-        run: echo "helloworld"
+        run: cat hello.txt
