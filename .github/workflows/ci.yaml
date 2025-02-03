@@ -8,17 +8,17 @@ jobs:
         run: echo "helloworld" > test.txt
 
       - name: upload artifact
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
           name: uploadedtest
-          patH: test.txt
+          path: test.txt
   
   downloadartifact:
     needs: job
     runs-on: ubuntu-latest
     steps:
       - name: download artifart
-        uses: actions/download-artifact@main
+        uses: actions/download-artifact@v3
         with:
           name: uploadtest
         
