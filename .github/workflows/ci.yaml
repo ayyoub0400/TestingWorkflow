@@ -20,7 +20,7 @@ jobs:
       - name: download artifart
         uses: actions/download-artifact@main
         with:
-          name: uploadtest
+          name: uploadedtest
         
       - name: output text
         run: cat test.txt
