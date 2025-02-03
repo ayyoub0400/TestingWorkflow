@@ -4,8 +4,22 @@ jobs:
   job:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
-      
       - name: helloworld
-        run: cat hello.txt
+        run: echo "helloworld" > test.txt
+
+      - name: upload artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: uploadedtest
+          patH: test.txt
+  
+  downloadartifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: download artifart
+        uses: actions/download-artifact@main
+        with:
+          name: uploadtest
+        
+      - run: output text
+        uses: cat test.txt
