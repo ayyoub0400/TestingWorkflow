@@ -1,5 +1,12 @@
 name: helloworkflow
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      usertext:
+        description: 'user text to print out'
+        required: true
+        type: string
+        
 jobs:
   job:
     runs-on: ubuntu-latest
