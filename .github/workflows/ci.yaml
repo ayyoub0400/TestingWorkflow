@@ -1,15 +1,13 @@
 name: helloworkflow
-on:
-  workflow_dispatch:
-    inputs:
-      usertext:
-        description: 'user text to print out'
-        required: true
-        type: string
+on: push
+
+concurrency:
+    group: sleepygroup
+    cancel-in-progress: false
 
 jobs:
   job:
     runs-on: ubuntu-latest
     steps:
-      - name: text
-        run: echo "${{ github.event.inputs.usertext}} "
+      - name: sleepy
+        run: sleep 30
