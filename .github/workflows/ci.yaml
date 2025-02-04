@@ -4,23 +4,8 @@ jobs:
   job:
     runs-on: ubuntu-latest
     steps:
-      - name: helloworld
-        run: echo "helloworld" > test.txt
-
-      - name: upload artifact
-        uses: actions/upload-artifact@main
-        with:
-          name: uploadedtest
-          path: test.txt
-  
-  downloadartifact:
-    needs: job
-    runs-on: ubuntu-latest
-    steps:
-      - name: download artifart
-        uses: actions/download-artifact@main
-        with:
-          name: uploadedtest
-        
-      - name: output text
-        run: cat test.txt
+      - name: text
+        env:
+          filename: test
+          filetext: test2
+        run: echo "$filetext" > $filename.txt
