@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: text
-        run: echo "$ {{ github.events.inputs.usertext}} "
+        run: echo "${{ github.event.inputs.usertext}} "
