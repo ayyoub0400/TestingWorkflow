@@ -16,8 +16,8 @@ jobs:
 
       - name: dockerhelloworld 
         run: |
-          docker pull "$image"
-          docker run "$image"
+          docker pull "${{env.image}}"
+          docker run "${{env.image}}"
         
 
       
