@@ -6,7 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: outputcontext
-      run: echo "${{ toJSON(github) }}"
+      run: |
+        echo "${{ github.repository }}"
+        echo "${{ github.event_name }}"
+        echo "${{ github.actor }}"
       
         
 
