@@ -8,8 +8,14 @@ jobs:
         os: [ubuntu-latest,windows-latest]
     runs-on: ${{matrix.os}}
     steps:
+      - name: dockerlogin
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_USERNAME}} 
+
       - name: dockerhelloworld 
-        run: docker run helloworld
+        run: |
+          docker pull helloworld
+          docker run helloworld
+        
 
       
     
