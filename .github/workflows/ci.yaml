@@ -1,23 +1,13 @@
 name: helloworkflow
 on: push
 
-env:
-  image: hello-world
-
 jobs:
   job:
-    strategy:
-      matrix:
-        os: [ubuntu-latest,windows-latest]
-    runs-on: ${{matrix.os}}
+    runs-on: ubuntu-latest
     steps:
-      - name: dockerlogin
-        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}} 
-
-      - name: dockerhelloworld 
-        run: |
-          docker pull "${{env.image}}"
-          docker run "${{env.image}}"
+    - name: outputcontext
+      run: echo "$ {{toJSON(github)}}"
+      
         
 
       
