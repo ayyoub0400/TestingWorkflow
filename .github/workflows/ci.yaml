@@ -1,6 +1,9 @@
 name: helloworkflow
 on: push
 
+env:
+  image: hello-world
+
 jobs:
   job:
     strategy:
@@ -13,8 +16,8 @@ jobs:
 
       - name: dockerhelloworld 
         run: |
-          docker pull helloworld
-          docker run helloworld
+          docker pull $image
+          docker run $image
         
 
       
