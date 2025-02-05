@@ -10,6 +10,7 @@ jobs:
         echo "${{ github.repository }}"
         echo "${{ github.event_name }}"
         echo "${{ github.actor }}"
+        echo running on  "${{ runner.os }}"
       
         
 
