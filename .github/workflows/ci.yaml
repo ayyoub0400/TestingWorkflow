@@ -1,5 +1,11 @@
 name: helloworkflow
-on: push
+on: 
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+
 
 jobs:
   job:
@@ -12,6 +18,7 @@ jobs:
         echo "${{ github.event_name }}"
         echo "${{ github.actor }}"
         echo running on  "${{ runner.os }}"
+        echo "this is the feature branch"
       
         
 
