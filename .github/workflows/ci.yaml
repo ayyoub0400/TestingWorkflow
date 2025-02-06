@@ -17,12 +17,12 @@ jobs:
     - name: outputcontext
       if: inputs.hellomars == true
       run: |
-        echo "${{ inputs.hellomars }}"
+        echo "${{ inputs.hellomars.name }}"
       
     - name: outputworld
       if: inputs.helloworld == true
       run: |
-        echo "${{ inputs.helloworld }}"
+        echo "${{ inputs.helloworld.name }}"
       
         
 
