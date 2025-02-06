@@ -2,27 +2,27 @@ name: helloworkflow
 on: 
   workflow_dispatch:
     inputs:
-      selector:
-        description: 'select output'
-        required: true
-        type: choice
-        options:
-          - helloworld
-          - hellomars
-
+      hellomars:
+        description: 'hellomars'
+        required: false
+        type: boolean
+      helloworld:
+        description: 'helloworld'
+        required: false
+        type: boolean
 jobs:
   job:
-    
     runs-on: ubuntu-latest
     steps:
     - name: outputcontext
+      if: inputs.hellomars == true
       run: |
-        echo "${{ github.repository }}"
-        echo "${{ github.event_name }}"
-        echo "${{ github.actor }}"
-        echo running on  "${{ runner.os }}"
-        echo "this is the feature branch"
-        echo "${{ inputs.selector }}"
+        echo "${{ inputs.hellomars.description}}"
+      
+    - name: outputworld
+      if: inputs.helloworld == true
+      run: |
+        echo "${{ inputs.helloworld.description}}"
       
         
 
