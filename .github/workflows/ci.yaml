@@ -1,41 +1,34 @@
 name: helloworkflow
 
 on:
-  workflow_dispatch:
-    inputs:
-      security_check:
-        description: 'Run security checks'
-        required: true
-        type: boolean
-        default: true
+  push:
+    branches: [main]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-    if: ${{ inputs.security_check }}
-    permissions:
-      security-events: write
-      actions: read
     steps:
-      - name: Checkout code
+      - name: Checkout code 🛎️
         uses: actions/checkout@v3
 
-      - name: Run security checks
-        if: ${{ inputs.security_check }}
-        uses: github/codeql-action/init@v3
+      - name: Set up Node.js 🛠️
+        uses: actions/setup-node@v3
         with:
-          languages: python
+          node-version: 16
 
-      - name: Perform security analysis
-        if: ${{ inputs.security_check }}
-        uses: github/codeql-action/analyze@v3
+      - name: Cache npm dependencies 📦 # 🌟 Cache npm dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          paths: '**/node_modules' # Cache 'node_modules' directories in project
+          key: dependencies-node-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }} # Cache key
+          restore-keys: |
 
+            - dependencies-node-${{ runner.os }}- # Fallback key (try to restore from any OS cache)
+            - dependencies-node- # Generic fallback
 
-      - name: user selected option
-        if: ${{ inputs.security_check && success()}} 
-        run: echo "here is the security check"
+      - name: Install dependencies 📦
+        run: npm install
 
-    
-
-
-    
+      - name: output keys
+        run: echo "${{ steps.cache.outputs.cache-hit }}"
