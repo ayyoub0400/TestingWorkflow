@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: ${{ inputs.security_check }}
     permissions:
       security-events: write
       actions: read
@@ -31,16 +32,9 @@ jobs:
 
 
       - name: user selected option
-        if: ${{ inputs.security_check }} && success()
+        if: ${{ inputs.security_check && success()}} 
         run: echo "here is the security check"
 
-      - name: user didnt select option
-        if: ${{ ! inputs.security_check }} && success()
-        run: echo "you didnt select the option"
-
-      - name: if failure
-        if: failure()
-        run: echo "you can neva make it "
     
 
 
