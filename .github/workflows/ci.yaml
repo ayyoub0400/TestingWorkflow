@@ -20,7 +20,7 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          paths: '**/node_modules' # Cache 'node_modules' directories in project
+          path: '**/node_modules' # Cache 'node_modules' directories in project
           key: dependencies-node-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }} # Cache key
           restore-keys: |
 
