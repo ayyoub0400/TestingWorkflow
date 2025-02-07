@@ -37,9 +37,10 @@ jobs:
       - name: user didnt select option
         if: ${{ ! inputs.security_check }} && success()
         run: echo "you didnt select the option"
-        
 
-        
+      - name: if failure
+        if: failure()
+        run: echo "you can neva make it "
     
 
 
