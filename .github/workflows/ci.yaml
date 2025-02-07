@@ -29,9 +29,17 @@ jobs:
         if: ${{ inputs.security_check }}
         uses: github/codeql-action/analyze@v2
 
+      - name: user selected option
+        if: ${{ inputs.security_check }} && success()
+        run: echo "here is the security check"
+
+      - name: user didnt select option
+        if: ${{ ! inputs.security_check }} && success()
+        run: echo "you didnt select the option"
+        
 
         
-        
     
+
 
     
