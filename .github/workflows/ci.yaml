@@ -21,13 +21,14 @@ jobs:
 
       - name: Run security checks
         if: ${{ inputs.security_check }}
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: python
 
       - name: Perform security analysis
         if: ${{ inputs.security_check }}
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
+
 
       - name: user selected option
         if: ${{ inputs.security_check }} && success()
