@@ -1,37 +1,37 @@
 name: helloworkflow
 
 on:
-  push:
-    branches: [main] 
+  workflow_dispatch:
+    inputs:
+      security_check:
+        description: 'Run security checks'
+        required: true
+        type: boolean
+        default: true
 
 jobs:
-  test-connection:
+  build:
     runs-on: ubuntu-latest
-    services: 
-      postgres:
-        image: postgres:13-alpine 
-        ports: ["5432:5432"] 
-        env:
-          POSTGRES_USER: testuser
-          POSTGRES_PASSWORD: testpassword
-          POSTGRES_DB: testdb
-
+    permissions:
+      security-events: write
+      actions: read
     steps:
-      - name: Checkout code 🛎️
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: postgres start
-        run: sleep 5 
+      - name: Run security checks
+        if: ${{ inputs.security_check }}
+        uses: github/codeql-action/init@v2
+        with:
+          languages: python
 
-      - name: install postgres
-        run: sudo apt-get update && sudo apt-get install -y postgresql-client 
+      - name: Perform security analysis
+        if: ${{ inputs.security_check }}
+        uses: github/codeql-action/analyze@v2
 
-      - name: test postgres ✅
-        run: |
-          export PGPASSWORD=testpassword
-          psql -h localhost -p 5432 -U testuser -d testdb -c "SELECT 1;"
-        continue-on-error: false 
 
-      - name: Display PostgreSQL service logs (if connection fails) 📜
-        if: failure() 
-        run: docker logs postgres
+        
+        
+    
+
+    
