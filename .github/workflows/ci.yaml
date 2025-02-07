@@ -6,6 +6,7 @@ on:
 
 jobs:
   build-and-test:
+    environment: production
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code 🛎️
@@ -23,7 +24,6 @@ jobs:
           path: '**/node_modules' # Cache 'node_modules' directories in project
           key: dependencies-node-${{ runner.os }}-${{ hashFiles('**/package.json') }} # Cache key
           restore-keys: |
-
             - dependencies-node-${{ runner.os }}- # Fallback key (try to restore from any OS cache)
             - dependencies-node- # Generic fallback
 
