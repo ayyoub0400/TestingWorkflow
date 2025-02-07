@@ -21,7 +21,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: '**/node_modules' # Cache 'node_modules' directories in project
-          key: dependencies-node-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }} # Cache key
+          key: dependencies-node-${{ runner.os }}-${{ hashFiles('**/package.json') }} # Cache key
           restore-keys: |
 
             - dependencies-node-${{ runner.os }}- # Fallback key (try to restore from any OS cache)
@@ -30,5 +30,6 @@ jobs:
       - name: Install dependencies 📦
         run: npm install
 
-      - name: output keys
+      - name: output hit or miss
         run: echo "${{ steps.cache.outputs.cache-hit }}"
+
