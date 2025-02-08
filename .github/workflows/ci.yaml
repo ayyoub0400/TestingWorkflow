@@ -1,34 +1,21 @@
-name: helloworkflow
+name: testingdockeraction
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code 🛎️
+      - name: checkoutcode
         uses: actions/checkout@v3
 
-      - name: Set up Node.js 🛠️
-        uses: actions/setup-node@v3
+      - name: Run action
+        uses: ./
+        id: hello-docker-action
         with:
-          node-version: 16
+          usertext: ayoub
 
-      - name: Cache npm dependencies 📦 # 🌟 Cache npm dependencies
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules' # Cache 'node_modules' directories in project
-          key: dependencies-node-${{ runner.os }}-${{ hashFiles('**/package.json') }} # Cache key
-          restore-keys: |
-            - dependencies-node-${{ runner.os }}- # Fallaaback key (try to restore from any OS cache)
-            - dependencies-node- # Generic fallback
-
-      - name: Install dependencies 📦
-        run: npm install
-
-      - name: output hit or miss
-        run: echo "${{ steps.cache.outputs.cache-hit }}"
-
+        
+      - name: output text
+        run: echo "${{ steps.hello-docker-action.outputs.greeting }}"

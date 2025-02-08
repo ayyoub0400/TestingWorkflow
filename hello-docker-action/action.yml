@@ -1,0 +1,21 @@
+name: 'Hello Docker Action'
+description: 'Simple action'
+author: 'ayoub'
+
+inputs:
+  usertext:
+    description: 'who we will greet'
+    required: true
+    default: 'World'
+
+outputs:
+  greeting:
+    description: 'greetingmesage'
+
+runs:
+  using: docker
+  image: 'Dockerfile'
+  entrypoint: 'entrypoint.sh'
+  args:
+    - "--usertext"
+    - ${{ inputs.usertext }}
